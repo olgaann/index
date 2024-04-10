@@ -22,6 +22,7 @@
         <mapping class="app.entities.Room" />
         <mapping class="app.entities.SingleRoom" />
         <mapping class="app.entities.SuiteRoom" />
+        <mapping class="app.entities.RoomTest" />
         <mapping class="app.entities.Booking" />
 
     </session-factory>
