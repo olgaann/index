@@ -17,8 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 @WebListener
 public class Main {
-
-
     public static void main(String[] args) {
 
         SessionFactory factory = HibernateUtil.getSessionFactory();
