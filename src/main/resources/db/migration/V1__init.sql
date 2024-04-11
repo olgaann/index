@@ -1,4 +1,4 @@
-CREATE TABLE clients (id serial, name varchar(100), phone varchar(100));
+CREATE TABLE clients (id serial, name varchar(100) not null, phone varchar(100) not null);
 
 insert into clients (name, phone) values ('Anna', '11-11-11'), ('Kate', '22-22-22'), ('Max', '33-33-33')
 --

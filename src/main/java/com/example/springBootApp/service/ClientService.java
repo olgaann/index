@@ -26,8 +26,9 @@ public class ClientService {
         return clientMapper.mapListClientToListClientDTO(clientRepository.findAll());
     }
 
-    public void createClient(ClientCreationRequestDTO clientCreationRequestDTO) {
-        Client client = clientMapper.mapClientToClientDTO(clientCreationRequestDTO);
-        clientRepository.save(client);
+    public ClientInfoResponseDTO createClient(ClientCreationRequestDTO requestDTO) {
+        Client client = clientMapper.mapClientToClientDTO(requestDTO);
+        client = clientRepository.save(client);
+        return clientMapper.mapClientToClientDTO(client);
     }
 }
