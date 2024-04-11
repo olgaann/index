@@ -10,12 +10,12 @@ import lombok.NoArgsConstructor;
 @Table(name = "test_rooms")
 @Data
 @NoArgsConstructor
-public class RoomTest extends Room {
+public class TestRoom extends Room {
 
     @Column(name = "randomInt")
     private int randomInt;
 
-    public RoomTest(int randomInt) {
+    public TestRoom(int randomInt) {
         this.randomInt = randomInt;
     }
 }

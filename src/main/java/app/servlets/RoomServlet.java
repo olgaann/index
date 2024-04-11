@@ -36,8 +36,22 @@ public class RoomServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //Валидный POST-запрос: /room/?number=n
+        //Валидный POST-запрос: /room/?count=n
         PrintWriter writer = response.getWriter();
         String numberString = request.getParameter("number");
+        String countString = request.getParameter("count");
+
+        if(countString != null) {
+            try {
+                int count = Integer.parseInt(countString);
+                List<Room> roomList = roomService.addRandomTestRooms(count);
+                writer.write(roomList.toString());
+                return;
+            } catch (NumberFormatException e) {
+                writer.write("Your request is invalid");
+                return;
+            }
+        }
 
         Optional<Room> newRoom = Optional.empty();
 
@@ -57,4 +71,7 @@ public class RoomServlet extends HttpServlet {
             writer.write("Room has not been added.");
         }
     }
+
+
+
 }

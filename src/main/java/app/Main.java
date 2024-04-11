@@ -2,13 +2,23 @@ package app;
 
 import app.entities.Client;
 import app.entities.Room;
+import app.listener.ContextListener;
+import app.services.RoomService;
+import app.servlets.RoomServlet;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import javax.servlet.ServletContext;
+import javax.servlet.annotation.WebListener;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-
+@WebListener
 public class Main {
+
+
     public static void main(String[] args) {
 
         SessionFactory factory = HibernateUtil.getSessionFactory();
@@ -26,5 +36,7 @@ public class Main {
             factory.close();
             session.close();
         }
+
+
     }
 }

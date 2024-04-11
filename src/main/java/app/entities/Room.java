@@ -38,5 +38,13 @@ public abstract class Room {
         return Integer.parseInt(String.valueOf(String.valueOf(roomNumber).charAt(0)));
     }
 
+    @Override
+    public String toString() {
+        return "Room{" +
+                "id=" + id +
+                ", number=" + number +
+                ", floor=" + floor +
+                '}';
+    }
 }
 

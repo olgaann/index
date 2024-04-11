@@ -23,10 +23,22 @@ public class RoomService {
         return roomRepository.add(number);
     }
 
+    public List<Room> addRandomTestRooms(int count) {
+        return roomRepository.addRandomTestRooms(count);
+    }
+
     public String roomListToPrintView(List<Room> roomList) {
         return roomList.stream()
                 .map(room -> String.format("%s %s", room.getId(), room.getNumber()))
                 .collect(Collectors.joining("\n"));
 
+    }
+
+    public List<Room> findWithoutIndex() {
+        return roomRepository.findWithoutIndex();
+    }
+
+    public List<Room> findWithIndex() {
+        return roomRepository.findWithIndex();
     }
 }

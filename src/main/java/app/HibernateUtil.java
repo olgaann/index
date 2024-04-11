@@ -1,5 +1,7 @@
 package app;
 
+import app.repositories.RoomRepository;
+import app.services.RoomService;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -13,6 +15,10 @@ public class HibernateUtil {
             System.err.println("Initial SessionFactory creation failed." + ex);
             throw new ExceptionInInitializerError(ex);
         }
+    }
+
+    public static RoomService getRoomService() {
+        return new RoomService(new RoomRepository(sessionFactory));
     }
 
     public static SessionFactory getSessionFactory() {
