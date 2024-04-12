@@ -1,6 +1,6 @@
 package com.example.springBootApp.mapper;
 
-import com.example.springBootApp.controller.dto.request.ClientCreationRequestDTO;
+import com.example.springBootApp.controller.dto.request.ClientRequestDTO;
 import com.example.springBootApp.entity.Client;
 import com.example.springBootApp.controller.dto.response.ClientInfoResponseDTO;
 import org.mapstruct.Mapper;
@@ -13,5 +13,5 @@ public interface ClientMapper {
 
     List<ClientInfoResponseDTO> mapListClientToListClientDTO(List<Client> clientList);
 
-    Client mapClientToClientDTO(ClientCreationRequestDTO clientDTO);
+    Client mapClientToClientDTO(ClientRequestDTO clientDTO);
 }
