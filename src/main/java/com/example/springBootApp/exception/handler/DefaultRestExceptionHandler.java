@@ -1,6 +1,7 @@
 package com.example.springBootApp.exception.handler;
 
 import com.example.springBootApp.exception.ClientNotFoundException;
+import com.example.springBootApp.exception.RoomNotFoundException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -26,6 +27,18 @@ public class DefaultRestExceptionHandler {
 
     @ExceptionHandler(ClientNotFoundException.class)
     public ResponseEntity<String> handleClientNotFoundException(ClientNotFoundException e) {
+        return ResponseEntity.badRequest()
+                .body(e.getMessage());
+    }
+
+    @ExceptionHandler(RoomNotFoundException.class)
+    public ResponseEntity<String> handleRoomNotFoundException(RoomNotFoundException e) {
+        return ResponseEntity.badRequest()
+                .body(e.getMessage());
+    }
+
+    @ExceptionHandler(Throwable.class)
+    public ResponseEntity<String> ThrowableException(Throwable e) {
         return ResponseEntity.badRequest()
                 .body(e.getMessage());
     }

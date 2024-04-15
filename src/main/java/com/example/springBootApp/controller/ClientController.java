@@ -1,6 +1,7 @@
 package com.example.springBootApp.controller;
 
 import com.example.springBootApp.controller.dto.request.ClientRequestDTO;
+import com.example.springBootApp.controller.dto.response.ClientAndRoomsInfoResponseDTO;
 import com.example.springBootApp.controller.dto.response.ClientInfoResponseDTO;
 import com.example.springBootApp.exception.ClientNotFoundException;
 import com.example.springBootApp.service.ClientService;
@@ -23,14 +24,19 @@ public class ClientController {
 
     private final ClientService clientService;
 
-    @GetMapping
+    @GetMapping("/")
     public List<ClientInfoResponseDTO> getClients() {
         return clientService.findAll();
     }
 
     @GetMapping("/{id}")
-    public ClientInfoResponseDTO getClientById(@PathVariable("id") Long id) {
+    public ClientInfoResponseDTO getClientById(@PathVariable("id") Long id) throws ClientNotFoundException {
         return clientService.findById(id);
+    }
+
+    @GetMapping("full/{id}")
+    public ClientAndRoomsInfoResponseDTO getClientAndRoomsById(@PathVariable("id") Long id) throws ClientNotFoundException {
+        return clientService.findClientAndRoomsById(id);
     }
 
     @PostMapping("/")

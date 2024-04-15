@@ -1,7 +1,7 @@
 package com.example.springBootApp.service;
 
-
 import com.example.springBootApp.controller.dto.request.ClientRequestDTO;
+import com.example.springBootApp.controller.dto.response.ClientAndRoomsInfoResponseDTO;
 import com.example.springBootApp.controller.dto.response.ClientInfoResponseDTO;
 import com.example.springBootApp.entity.Client;
 import com.example.springBootApp.exception.ClientNotFoundException;
@@ -20,8 +20,13 @@ public class ClientService {
     private final ClientRepository clientRepository;
     private final ClientMapper clientMapper;
 
-    public ClientInfoResponseDTO findById(long id) {
-        return clientMapper.mapClientToClientDTO(clientRepository.findById(id).get());
+    public Client findClientById(long id) throws ClientNotFoundException {
+        Optional<Client> optionalClient = clientRepository.findById(id);
+        if (optionalClient.isEmpty()) throw new ClientNotFoundException(id);
+        return optionalClient.get();
+    }
+    public ClientInfoResponseDTO findById(long id) throws ClientNotFoundException {
+        return clientMapper.mapClientToClientInfoDTO(findClientById(id));
     }
 
     public List<ClientInfoResponseDTO> findAll() {
@@ -31,22 +36,23 @@ public class ClientService {
     public ClientInfoResponseDTO createClient(ClientRequestDTO requestDTO) {
         Client client = clientMapper.mapClientToClientDTO(requestDTO);
         client = clientRepository.save(client);
-        return clientMapper.mapClientToClientDTO(client);
+        return clientMapper.mapClientToClientInfoDTO(client);
     }
 
     public ClientInfoResponseDTO updateClient(Long id, ClientRequestDTO clientRequestDTO) throws ClientNotFoundException {
-        Optional<Client> optionalClient = clientRepository.findById(id);
-        if (optionalClient.isEmpty()) throw new ClientNotFoundException(id);
-        Client client = optionalClient.get();
+        Client client = findClientById(id);
         client.setName(clientRequestDTO.getName());
         client.setPhone(clientRequestDTO.getPhone());
         client = clientRepository.save(client);
-        return clientMapper.mapClientToClientDTO(client);
+        return clientMapper.mapClientToClientInfoDTO(client);
     }
 
     public void deleteClient(Long id) throws ClientNotFoundException {
-        Optional<Client> optionalClient = clientRepository.findById(id);
-        if (optionalClient.isEmpty()) throw new ClientNotFoundException(id);
+        findClientById(id);
         clientRepository.deleteById(id);
+    }
+
+    public ClientAndRoomsInfoResponseDTO findClientAndRoomsById(Long id) throws ClientNotFoundException{
+        return clientMapper.mapClientToClientAndRoomsInfoDTO(findClientById(id));
     }
 }
