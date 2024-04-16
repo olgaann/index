@@ -26,11 +26,6 @@ import java.util.List;
 @RequestMapping("/bookings")
 public class BookingController {
     private final BookingService bookingService;
-    private final BookingRepository bookingRepository;
-    private final ClientService clientService;
-    private final RoomService roomService;
-    private final ClientRepository clientRepository;
-    private final RoomRepository roomRepository;
 
     @GetMapping("/")
     public ResponseEntity<List<BookingInfoResponseDTO>> getAllBookings() {
@@ -38,21 +33,6 @@ public class BookingController {
         return ResponseEntity.ok()
                 .body(bookingInfoResponseDTOList);
     }
-
-//    @GetMapping("/test/{clientId}")
-//    public ResponseEntity<List<Booking>> test(@PathVariable("clientId") Long clientId) throws ClientNotFoundException {
-//            return ResponseEntity.ok(bookingService.findAllByClientId(clientId));
-//
-//    }
-
-//    @GetMapping("/test/{clientId}")
-//    public ResponseEntity<List<BookingInfoResponseDTO>> test(@PathVariable("clientId") Long clientId) throws ClientNotFoundException {
-//        return ResponseEntity.ok(bookingService.findAllByClientId(clientId));
-//
-//    }
-
-
-
 
     @PostMapping("/")
     public ResponseEntity<BookingInfoResponseDTO> addBooking(@RequestParam(value = "clientId") Long id,

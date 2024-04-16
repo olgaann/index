@@ -20,7 +20,6 @@ import java.util.Optional;
 public class RoomController {
     private final RoomService roomService;
 
-
     @GetMapping("/{number}")
     public RoomInfoResponseDTO getRoomByNumber(@PathVariable("number") int nubmer) throws RoomNotFoundException {
         RoomInfoResponseDTO RoomInfoResponseDTO = roomService.findByNumber(nubmer);
